@@ -1,6 +1,8 @@
 echo off
 rem 
 rem 1st parameter -- number of measurement loops (default value see in main.py)
+
+
 set CUR_PATH=%cd%
 echo %CUR_PATH%
 
