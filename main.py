@@ -36,4 +36,5 @@ if __name__ == '__main__':
         timed_stats[datetime_str] = ({'CPU Stata': cpu_stats}, {'Processes Stats': procs_stats})
 
     pp(timed_stats)
+
 #   print(time.time() - start_time)
