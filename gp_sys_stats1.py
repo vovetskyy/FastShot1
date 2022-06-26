@@ -41,7 +41,7 @@ def get_process_stats():
 
     for p in psutil.process_iter(['name']):
         # as different processes may have the same name (like "chrome.exe"),
-        # combination of name + pid will be used as unique process Id (dictionary key)
+        # combination of name + pid will be used as unique process Id (dictionary keys)
         proc_name = p.name()
         pid_str = str(p.pid)
         proc_id_str = proc_name + '(' + pid_str + ')'
