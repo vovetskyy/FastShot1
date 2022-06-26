@@ -16,7 +16,7 @@ def init_measurements():
 def get_cpu_stats():
     cpus = {}
 
-    cpus['CPU: Num of cores'] = psutil.cpu_count();
+    cpus['CPU: Num of cores'] = psutil.cpu_count()
     cpus['CPU: Load, %, per core'] = psutil.cpu_percent(percpu=True)
     cpus['CPU: Times, seconds, per core'] = psutil.cpu_times(percpu=True)
     cpus['CPU: Freq, MHz, per core'] = psutil.cpu_freq(percpu=True)
@@ -40,8 +40,20 @@ def get_process_stats():
     core_cnt = psutil.cpu_count()
 
     for p in psutil.process_iter(['name']):
+        # as different processes may have the same name (like "chrome.exe"),
+        # combination of name + pid will be used as unique process Id (dictionary key)
+        proc_name = p.name()
+        pid_str = str(p.pid)
+        proc_id_str = proc_name + '(' + pid_str + ')'
+
         io_counters = p.io_counters()
-        procs[p.name()] = ({'CPU load, %': (p.cpu_percent() / core_cnt)},
+
+        procs[proc_id_str] = ({'Proc name': proc_name},
+                              {'Proc Pid': pid_str},
+                            # it is recommended to divide reported load by number of cores.
+                            # Otherwise load may be even > 100%.
+                            # See https://psutil.readthedocs.io/en/latest/#psutil.Process.cpu_percent
+                            {'CPU load, %': (p.cpu_percent() / core_cnt)},
                            {'MemUsage, bytes': (p.memory_info().rss)},
                            {'IO Reads/writes/other, bytes': (io_counters.read_bytes, io_counters.write_bytes,
                                                              io_counters.other_bytes)},
