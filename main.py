@@ -33,7 +33,7 @@ if __name__ == '__main__':
         # (expected to be used for synchronization with other measurements)
         datetime_str = timestamp.strftime('%Y_%m_%d_%H_%M_%S_%f_%Z')
 
-        timed_stats[datetime_str] = ({'CPU Stata': cpu_stats}, {'Processes Stats': procs_stats})
+        timed_stats[datetime_str] = ({'CPU Stats': cpu_stats}, {'Processes Stats': procs_stats})
 
     pp(timed_stats)
 
