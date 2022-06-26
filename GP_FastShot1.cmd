@@ -7,4 +7,4 @@ set CUR_PATH=%cd%
 
 echo on
 
-%CUR_PATH%\venv\Scripts\python.exe %CUR_PATH%\main.py 4 > %CUR_PATH%\RawOutput\Test1.txt
+%CUR_PATH%\venv\Scripts\python.exe %CUR_PATH%\main.py 4 > %CUR_PATH%\RawOutput\Test1.txt 2>error.log

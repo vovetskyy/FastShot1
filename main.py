@@ -37,4 +37,6 @@ if __name__ == '__main__':
 
     pp(timed_stats)
 
-#   print(time.time() - start_time)
+script_time = time.time() - start_time
+print('Scripttime: ' + str(script_time) + ' sec', file=sys.stderr)
+print('Avg. time per measurement: ' + str(script_time/num_loops) + ' sec', file=sys.stderr)
