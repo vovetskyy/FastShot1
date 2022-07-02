@@ -15,14 +15,21 @@ if __name__ == '__main__':
     start_time = time.time()
     timed_stats = {}
 
+    # ---------------------------------
+    # calculate number of loops
     if(len(sys.argv) > 1):
         try:
             num_loops = int(sys.argv[1])
         except:
             print('Can\'t covert \"' + sys.argv[1] + '\" to (int). Default value ' + str(DEF_LOOPS) + ' is used.')
 
+    # ---------------------------------
+    # prepare measurements
     gpss.init_measurements()
+#    gpss.start_measurements()
 
+    # ---------------------------------
+    # do measurements
     for i in range(1, num_loops+1):
         timestamp = datetime.now()
 
@@ -35,8 +42,16 @@ if __name__ == '__main__':
 
         timed_stats[datetime_str] = ({'CPU Stats': cpu_stats}, {'Processes Stats': procs_stats})
 
+    # ---------------------------------
+    # stop measurements
+    gpss.stop_measurements()
+
+    # ---------------------------------
+    # prepare results
     pp(timed_stats)
 
+    # ---------------------------------
+    # print scrip's runtime info to STDERR
     script_time = time.time() - start_time
     print('Scripttime: ' + str(script_time) + ' sec', file=sys.stderr)
     print('Avg. time per measurement: ' + str(script_time/num_loops) + ' sec', file=sys.stderr)
