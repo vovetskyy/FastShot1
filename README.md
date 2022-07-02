@@ -7,7 +7,7 @@
 * datetime
 * pprint
 * [psutil](https://psutil.readthedocs.io/en/latest/)
-* [scapy](https://www.thepythoncode.com/topic/scapy)
+* [scapy](https://scapy.readthedocs.io/en/latest/usage.html)
 
 ### General Libraries
 * for scapy: libpcap (On Windows e.g. as [Npcap](https://npcap.com/#download)).
