@@ -12,6 +12,19 @@ def init_measurements():
     for p in psutil.process_iter(['name']):
         foo = p.cpu_percent()
 
+def get_detaied_net_stats():
+    detailed_net_stats = {}
+
+    net_io_detailed = psutil.net_io_counters(pernic=True)
+    for netif, load in net_io_detailed.items():
+        bytes_sent = load.bytes_sent
+        bytes_recv = load.bytes_recv
+        id_str = 'NET(' + netif + '), sent/received, bytes'
+        detailed_net_stats[id_str] = (bytes_sent, bytes_recv)
+
+    #pp(net_io_detailed)
+    return detailed_net_stats
+
 
 def get_cpu_stats():
     cpus = {}
@@ -28,8 +41,12 @@ def get_cpu_stats():
     cpus['IO, read/write, bytes'] = (disk_io.read_bytes, disk_io.write_bytes)
     cpus['IO, read/write, milliseconds'] = (disk_io.read_time, disk_io.write_time)
 
+    # get total network bytes
     net_io = psutil.net_io_counters()
-    cpus['NET, sent/received, bytes'] = (net_io.bytes_sent, net_io.bytes_recv)
+    cpus['NET Total, sent/received, bytes'] = (net_io.bytes_sent, net_io.bytes_recv)
+
+    # get network bytes per interface
+    cpus['NET, per Interface:'] = get_detaied_net_stats()
 
     return cpus
 
