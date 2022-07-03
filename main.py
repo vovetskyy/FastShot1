@@ -7,30 +7,14 @@ import gp_sys_stats1 as gpss
 
 DEF_LOOPS = 3
 
-if __name__ == '__main__':
-    # parameters:
-    # %1 -- number of measurement loops (DEF_LOOPS by default)
-    num_loops = DEF_LOOPS
+timed_stats = {}
 
-    start_time = time.time()
-    timed_stats = {}
-
-    # ---------------------------------
-    # calculate number of loops
-    if(len(sys.argv) > 1):
-        try:
-            num_loops = int(sys.argv[1])
-        except:
-            print('Can\'t covert \"' + sys.argv[1] + '\" to (int). Default value ' + str(DEF_LOOPS) + ' is used.')
-
-    # ---------------------------------
-    # prepare measurements
-    gpss.init_measurements()
-#    gpss.start_measurements()
+def meas_loop(loops_count):
+    global timed_stats
 
     # ---------------------------------
     # do measurements
-    for i in range(1, num_loops+1):
+    for i in range(1, loops_count + 1):
         timestamp = datetime.now()
 
         cpu_stats = gpss.get_cpu_stats()
@@ -42,8 +26,31 @@ if __name__ == '__main__':
 
         timed_stats[datetime_str] = ({'CPU Stats': cpu_stats}, {'Processes Stats': procs_stats})
 
+
+
+if __name__ == '__main__':
+    # parameters:
+    # %1 -- number of measurement loops (DEF_LOOPS by default)
+    num_loops = DEF_LOOPS
+
+    start_time = time.time()
+
     # ---------------------------------
-    # stop measurements
+    # calculate number of loops
+    if(len(sys.argv) > 1):
+        try:
+            num_loops = int(sys.argv[1])
+        except:
+            print('Can\'t covert \"' + sys.argv[1] + '\" to (int). Default value ' + str(DEF_LOOPS) + ' is used.')
+
+
+    # ---------------------------------
+    # prepare measurements
+    gpss.init_measurements()
+    gpss.start_measurements()
+
+    meas_loop(num_loops)
+
     gpss.stop_measurements()
 
     # ---------------------------------
@@ -51,7 +58,7 @@ if __name__ == '__main__':
     pp(timed_stats)
 
     # ---------------------------------
-    # print scrip's runtime info to STDERR
+    # print script's runtime info to STDERR
     script_time = time.time() - start_time
     print('Scripttime: ' + str(script_time) + ' sec', file=sys.stderr)
     print('Avg. time per measurement: ' + str(script_time/num_loops) + ' sec', file=sys.stderr)
