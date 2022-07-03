@@ -17,6 +17,7 @@ def meas_loop(loops_count):
     for i in range(1, loops_count + 1):
         timestamp = datetime.now()
 
+        sys_stats = gpss.get_sys_stats()
         cpu_stats = gpss.get_cpu_stats()
         procs_stats = gpss.get_process_stats()
 
@@ -24,7 +25,7 @@ def meas_loop(loops_count):
         # (expected to be used for synchronization with other measurements)
         datetime_str = timestamp.strftime('%Y_%m_%d_%H_%M_%S_%f_%Z')
 
-        timed_stats[datetime_str] = ({'CPU Stats': cpu_stats}, {'Processes Stats': procs_stats})
+        timed_stats[datetime_str] = ({'SYS Stats': sys_stats}, {'CPU Stats': cpu_stats}, {'Processes Stats': procs_stats})
 
 
 

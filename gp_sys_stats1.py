@@ -1,9 +1,14 @@
 import psutil
+#'platform' seems to be defined somewhere as string --> use fool alias
+import platform as platfrom_info
 from scapy.all import *
 from pprint import pprint as pp
 
 # variable to start/stop sniffing using scapy
 meas_running = False
+
+sys_stats = {}
+
 # all network adapter's MAC addresses
 all_macs = {}
 # A dictionary to map each connection to its corresponding process ID (PID)
@@ -23,6 +28,8 @@ def init_measurements():
 
     # ensure default state of non-sniffing
     meas_running = False
+
+    read_sys_stats(sys_stats)
 
     # foo execution of psutil.cpu_percent(), as 1st time it will return a meaningless 0.0 value
     # see https://psutil.readthedocs.io/en/latest/#psutil.cpu_percent for details
@@ -65,6 +72,20 @@ def is_measurement_running(x):
 
     return not meas_running
 
+
+# ---------------------------------------
+# system Information part
+def read_sys_stats(sys_stats_dict):
+    sys_stats_dict['System'] = platfrom_info.system()
+    sys_stats_dict['Node'] = platfrom_info.node()
+    sys_stats_dict['Release'] = platfrom_info.release()
+    sys_stats_dict['Version'] = platfrom_info.version()
+    sys_stats_dict['Machine'] = platfrom_info.machine()
+    sys_stats_dict['Processor'] = platfrom_info.processor()
+
+
+def get_sys_stats():
+    return sys_stats
 
 
 # ---------------------------------------
