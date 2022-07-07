@@ -19,13 +19,14 @@ def meas_loop(loops_count):
 
         sys_stats = gpss.get_sys_stats()
         cpu_stats = gpss.get_cpu_stats()
+        gpu_stats = gpss.get_gpu_stats()
         procs_stats = gpss.get_process_stats()
 
         # 2022_06_25_17_30_54_915740_ as unique id for the measurement
         # (expected to be used for synchronization with other measurements)
         datetime_str = timestamp.strftime('%Y_%m_%d_%H_%M_%S_%f_%Z')
 
-        timed_stats[datetime_str] = ({'SYS Stats': sys_stats}, {'CPU Stats': cpu_stats}, {'Processes Stats': procs_stats})
+        timed_stats[datetime_str] = ({'SYS Stats': sys_stats}, {'CPU Stats': cpu_stats}, {'GPU Stats': gpu_stats}, {'Processes Stats': procs_stats})
 
 
 

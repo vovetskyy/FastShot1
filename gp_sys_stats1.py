@@ -2,6 +2,7 @@ import psutil
 #'platform' seems to be defined somewhere as string --> use fool alias
 import platform as platfrom_info
 from scapy.all import *
+import GPUtil
 from pprint import pprint as pp
 
 # variable to start/stop sniffing using scapy
@@ -137,7 +138,7 @@ def process_packet(packet_info):
             else:
                 # incoming packet, download
                 pid2traffic[packet_pid][1] += len(packet_info)
-    sniff_count +=1
+    sniff_count += 1
 
 
 # ---------------------------------------
@@ -210,3 +211,26 @@ def get_process_stats():
     # pp(pid2traffic)
     # pp(procs)
     return procs
+
+
+def get_gpu_stats():
+    gpu_stats = {}
+
+    gpus = GPUtil.getGPUs()
+
+    for gpu in gpus:
+        # get the GPU id
+        gpu_id = gpu.id
+        # get the GPU uuid
+        gpu_uuid = gpu.uuid
+        # name of GPU
+        gpu_name = gpu.name
+
+        gpu_id_str = gpu_name + ' (' + str(gpu_id) + ')'
+
+        gpu_stats[gpu_id_str] = {'GPU Name': gpu_name, 'GPU Id': gpu_id, 'GPU UUID': gpu_uuid,
+                               'GPU Load, %': gpu.load*100, 'GPU temperature, Celsius': gpu.temperature,
+                               'Total Memory, MB': gpu.memoryTotal, 'Used Memory, MB': gpu.memoryUsed,
+                               'Free Memory, MB': gpu.memoryFree}
+
+    return gpu_stats
