@@ -57,6 +57,7 @@
 * [GPUtil](https://github.com/anderskm/gputil)
 
 ### General Libraries
+* for Intel power measurements: [Intel® Power Gadget](https://www.intel.com/content/www/us/en/developer/articles/tool/power-gadget.html)
 * for scapy: libpcap (On Windows e.g. as [Npcap](https://npcap.com/#download)).
  For details see [StackOverflow](https://stackoverflow.com/questions/68691090/python-scapy-error-no-libpcap-provider-available).
 * for GPUtil: nvidia-smi
