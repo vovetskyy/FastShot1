@@ -9,6 +9,7 @@ DEF_LOOPS = 3
 
 timed_stats = {}
 
+
 def meas_loop(loops_count):
     global timed_stats
 
@@ -26,8 +27,9 @@ def meas_loop(loops_count):
         # (expected to be used for synchronization with other measurements)
         datetime_str = timestamp.strftime('%Y_%m_%d_%H_%M_%S_%f_%Z')
 
-        timed_stats[datetime_str] = ({'SYS Stats': sys_stats}, {'CPU Stats': cpu_stats}, {'GPU Stats': gpu_stats}, {'Processes Stats': procs_stats})
-
+        timed_stats[datetime_str] = (
+            {'SYS Stats': sys_stats}, {'CPU Stats': cpu_stats}, {'GPU Stats': gpu_stats},
+            {'Processes Stats': procs_stats})
 
 
 if __name__ == '__main__':
@@ -39,12 +41,11 @@ if __name__ == '__main__':
 
     # ---------------------------------
     # calculate number of loops
-    if(len(sys.argv) > 1):
+    if (len(sys.argv) > 1):
         try:
             num_loops = int(sys.argv[1])
         except:
             print('Can\'t covert \"' + sys.argv[1] + '\" to (int). Default value ' + str(DEF_LOOPS) + ' is used.')
-
 
     # ---------------------------------
     # prepare measurements
@@ -63,4 +64,4 @@ if __name__ == '__main__':
     # print script's runtime info to STDERR
     script_time = time.time() - start_time
     print('Scripttime: ' + str(script_time) + ' sec', file=sys.stderr)
-    print('Avg. time per measurement: ' + str(script_time/num_loops) + ' sec', file=sys.stderr)
+    print('Avg. time per measurement: ' + str(script_time / num_loops) + ' sec', file=sys.stderr)

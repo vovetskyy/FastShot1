@@ -1,5 +1,5 @@
 import psutil
-#'platform' seems to be defined somewhere as string --> use fool alias
+# 'platform' seems to be defined somewhere as string --> use fool alias
 import platform as platfrom_info
 from scapy.all import *
 import GPUtil
@@ -119,8 +119,8 @@ def get_connections():
 def process_packet(packet_info):
     global pid2traffic
     global sniff_count
-#    print('Process packets')
-#    pp(packet_info)
+    #    print('Process packets')
+    #    pp(packet_info)
     try:
         # get the packet source & destination IP addresses and ports
         packet_connection = (packet_info.sport, packet_info.dport)
@@ -229,8 +229,8 @@ def get_gpu_stats():
         gpu_id_str = gpu_name + ' (' + str(gpu_id) + ')'
 
         gpu_stats[gpu_id_str] = {'GPU Name': gpu_name, 'GPU Id': gpu_id, 'GPU UUID': gpu_uuid,
-                               'GPU Load, %': gpu.load*100, 'GPU temperature, Celsius': gpu.temperature,
-                               'Total Memory, MB': gpu.memoryTotal, 'Used Memory, MB': gpu.memoryUsed,
-                               'Free Memory, MB': gpu.memoryFree}
+                                 'GPU Load, %': gpu.load * 100, 'GPU temperature, Celsius': gpu.temperature,
+                                 'Total Memory, MB': gpu.memoryTotal, 'Used Memory, MB': gpu.memoryUsed,
+                                 'Free Memory, MB': gpu.memoryFree}
 
     return gpu_stats
