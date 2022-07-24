@@ -27,9 +27,14 @@ set PC_NAME=%COMPUTERNAME%
 
 set NAME_PREFIX=%PC_NAME%_%FULL_TIMESTAMP%
 
+rem set output dir dependent on PCF name, and create the dir, if it does not exist
+set OUTPUT_PATH="%CUR_PATH%\RawOutput\%PC_NAME%"
+if not exist "%OUTPUT_PATH%" mkdir "%OUTPUT_PATH%"
 
-set INTEL_PG_CSV_OUT="%CUR_PATH%\RawOutput\%NAME_PREFIX%_IPG.csv"
-set SCRIPT1_OUT="%CUR_PATH%\RawOutput\%NAME_PREFIX%_Script1.txt"
+
+rem set full names for output files
+set INTEL_PG_CSV_OUT=%OUTPUT_PATH%\%NAME_PREFIX%_IPG.csv
+set SCRIPT1_OUT=%OUTPUT_PATH%\%NAME_PREFIX%_Script1.txt
 
 rem -----------------------------------------------------------------
 
