@@ -35,6 +35,7 @@ if not exist "%OUTPUT_PATH%" mkdir "%OUTPUT_PATH%"
 rem set full names for output files
 set INTEL_PG_CSV_OUT=%OUTPUT_PATH%\%NAME_PREFIX%_IPG.csv
 set SCRIPT1_OUT=%OUTPUT_PATH%\%NAME_PREFIX%_Script1.txt
+set SCRIPT2_OUT=%OUTPUT_PATH%\%NAME_PREFIX%_Script2.json
 
 rem -----------------------------------------------------------------
 
@@ -43,4 +44,4 @@ rem run measurements
 echo on
 
 rem %INTEL_PG_PATH%\PowerLog3.0.exe -file %INTEL_PG_CSV_OUT% -duration 2
-%INTEL_PG_PATH%\PowerLog3.0.exe -file %INTEL_PG_CSV_OUT% -resolution 500 -cmd "GP_FastShot1.cmd %SCRIPT1_OUT% %NUM_LOOPS%"
+%INTEL_PG_PATH%\PowerLog3.0.exe -file %INTEL_PG_CSV_OUT% -resolution 500 -cmd "GP_FastShot1.cmd %SCRIPT2_OUT% %NUM_LOOPS%"

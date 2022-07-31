@@ -2,6 +2,7 @@ import sys
 import time
 from datetime import datetime
 from pprint import pprint as pp
+import json
 
 import gp_sys_stats1 as gpss
 
@@ -58,10 +59,11 @@ if __name__ == '__main__':
 
     # ---------------------------------
     # prepare results
-    pp(timed_stats)
+    # pp(timed_stats)
+    json.dump(timed_stats, sys.stdout, indent=4, separators=(',', ': '), sort_keys=True)
 
     # ---------------------------------
     # print script's runtime info to STDERR
     script_time = time.time() - start_time
-    print('Scripttime: ' + str(script_time) + ' sec', file=sys.stderr)
+    print('\nScripttime: ' + str(script_time) + ' sec', file=sys.stderr)
     print('Avg. time per measurement: ' + str(script_time / num_loops) + ' sec', file=sys.stderr)
