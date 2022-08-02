@@ -1,4 +1,4 @@
-echo on
+echo off
 rem 
 rem 1st parameter -- name of the output file
 rem 2nd parameter -- number of measurement loops (default value see in main.py)

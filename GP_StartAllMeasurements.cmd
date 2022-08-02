@@ -25,7 +25,7 @@ rem now we have timestamp in the %FULL_TIMESTAMP%
 
 set PC_NAME=%COMPUTERNAME%
 
-set NAME_PREFIX=%PC_NAME%_%FULL_TIMESTAMP%
+set NAME_PREFIX=%PC_NAME%__%FULL_TIMESTAMP%
 
 rem set output dir dependent on PCF name, and create the dir, if it does not exist
 set OUTPUT_PATH="%CUR_PATH%\RawOutput\%PC_NAME%"
@@ -33,9 +33,9 @@ if not exist "%OUTPUT_PATH%" mkdir "%OUTPUT_PATH%"
 
 
 rem set full names for output files
-set INTEL_PG_CSV_OUT=%OUTPUT_PATH%\%NAME_PREFIX%_IPG.csv
-set SCRIPT1_OUT=%OUTPUT_PATH%\%NAME_PREFIX%_Script1.txt
-set SCRIPT2_OUT=%OUTPUT_PATH%\%NAME_PREFIX%_Script2.json
+set INTEL_PG_CSV_OUT=%OUTPUT_PATH%\%NAME_PREFIX%__IPG.csv
+set SCRIPT1_OUT=%OUTPUT_PATH%\%NAME_PREFIX%__Script1.txt
+set SCRIPT2_OUT=%OUTPUT_PATH%\%NAME_PREFIX%__Script2.json
 
 rem -----------------------------------------------------------------
 
