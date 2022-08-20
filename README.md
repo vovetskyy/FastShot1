@@ -55,6 +55,7 @@
 * sys
 * time
 * datetime
+* json
 * pprint
 * [psutil](https://psutil.readthedocs.io/en/latest/)
 * [scapy](https://scapy.readthedocs.io/en/latest/usage.html)
